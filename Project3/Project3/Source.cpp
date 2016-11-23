@@ -9,8 +9,6 @@ using namespace std;
 // Proceeds to reverse the numbers using an algorithm. Checks if result is a palindrome and prints to console.
 // Asks if you would like to try again.
 
-
-
 int main() {
 	int n, umvent = 0, eftir, temp;
 	int i = 0, k = 0;
