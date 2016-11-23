@@ -59,7 +59,7 @@ int main() {
 	if (answer == ('y') || answer == 'Y') {
 		main();
 	}
-	if (answer == ('n') || answer == ('Y')) {
+	if (answer == ('n') || answer == ('N')) {
 		return 0;
 	}
 	else {
