@@ -1,5 +1,8 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
+#include <sstream>
+
 using namespace std;
 
 string const inText1 = "Foten är en kroppsdel som förekommer mycket i våra uttryck.";
@@ -12,22 +15,37 @@ string const inText7 = "Stryka på foten betyder att tvingas ge upp.";
 string const inText8 = "Leva på stor fot betyder att föra ett dyrbart eller slösaktigt leverne.";
 string const inText9 = "Varför fick du foten???";
 
-string final_string = inText1 + "\n" + inText2 + "\n" + inText3 + "\n" + inText4 + "\n" + inText5
-+ "\n" + inText6 + "\n" + inText7 + "\n" + inText8 + "\n" + inText9;
+string final_string = "\n" + inText1 + "\n" + inText2 + "\n" + inText3 + "\n" + inText4 + "\n" + inText5
++ "\n" + inText6 + "\n" + inText7 + "\n" + inText8 + "\n" + inText9 + "\n";
 
-string word1 = "fot", word2 = "foten", word3 = "bakfoten";
-size_t found1 = final_string.find(word1), found2 = final_string.find(word2), found3 = final_string.find(word3);
-
-
+string word;
+size_t pos;
+int i;
 
 int main() {
+	
+	// Set variables to replace upper case "Fot".
+	word = "Fot";
+	pos = final_string.find(word);
 
-	final_string.replace(found1, 3, "hon");
-	final_string.replace(found2, 5, "handen");
-	final_string.replace(found3, 8, " bakhanden");
+	// .find() returns the position of the first character to last character found. 
+	// I set < 1000 because I noticed that it never passed 1000 when printed to console.  
+	while (pos < 1000) {
+		final_string.replace(pos, word.length(), "Hand");
+		pos = final_string.find(word);
+		i++;
+	}
+	// Reset Variables to replace lowercase "fot".
+	word = "fot";
+	pos = final_string.find(word);
+
+	while (pos < 1000) {
+		final_string.replace(pos, word.length(), "hand");
+		pos = final_string.find(word);
+		i++;
+	}
+	cout << pos << " " << i << endl;
 	cout << final_string << endl;
 
-
 	system("Pause");
-
 }
