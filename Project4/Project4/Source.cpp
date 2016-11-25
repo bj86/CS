@@ -1,7 +1,6 @@
 #include <iostream>
-#include <iomanip>
 #include <string>
-#include <sstream>
+#include <clocale> setlocale(LC_ALL, "sv-se");
 
 using namespace std;
 
@@ -29,7 +28,7 @@ int main() {
 	pos = final_string.find(word);
 
 	// .find() returns the position of the first character to last character found. 
-	// I set < 1000 because I noticed that it never passed 1000 when printed to console. 
+	// I set pos < 1000 because I noticed that it never passed 1000 when printed to console. 
 	// If pos passes the length of the string, it will crash the program. 
 
 	while (pos < 1000) {
