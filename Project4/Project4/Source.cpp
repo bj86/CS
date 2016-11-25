@@ -25,7 +25,7 @@ int main() {
 	final_string.replace(found1, 3, "hon");
 	final_string.replace(found2, 5, "handen");
 	final_string.replace(found3, 8, " bakhanden");
-	cout << final_string;
+	cout << final_string << endl;
 
 
 	system("Pause");
