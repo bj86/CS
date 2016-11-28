@@ -3,6 +3,9 @@
 
 using namespace std;
 
+// Name sorter by Baja1600.
+
+
 // Variables for lastname + firstname and firstname + lastname.
 string firstname1, firstname2, firstname3;
 string lastname1, lastname2, lastname3;
@@ -18,22 +21,22 @@ int main() {
 	cin >> firstname1;
 	cout << "Lastname (1): ";
 	cin >> lastname1;
-	name1 = lastname1 + ", " + firstname1;
-	fname1 = lastname1 + ", " + firstname1;
+	name1 = lastname1 + " " + firstname1;
+	fname1 = lastname1 + " " + firstname1;
 
 	cout << "Firstname (2): ";
 	cin >> firstname2;
 	cout << "Lastname (2): ";
 	cin >> lastname2;
-	name2 = lastname2 + ", " + firstname2;
-	fname2 = lastname2 + ", " + firstname2;
+	name2 = lastname2 + " " + firstname2;
+	fname2 = lastname2 + " " + firstname2;
 
 	cout << "Firstname (3): ";
 	cin >> firstname3;
 	cout << "Lastname (3): ";
 	cin >> lastname3;
-	name3 = lastname3 + ", " + firstname3;
-	fname3 = lastname3 + ", " + firstname3;
+	name3 = lastname3 + " " + firstname3;
+	fname3 = lastname3 + " " + firstname3;
 	cout << endl;
 
 	// Checking if any last names are equal. 
