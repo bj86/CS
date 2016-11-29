@@ -5,7 +5,7 @@ using namespace std;
 	// Very hard assignment, but fun to do! :)
 	// By Baja1600
 
-string word, crypted, decrypted;
+string word, crypted;
 int j = 0, k = 0, i = 13, x, controller = 0;
 unsigned char c;
 
