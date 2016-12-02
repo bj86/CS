@@ -17,8 +17,7 @@ int price();
 
 int main()
 {
-	dice();
-	cout << price();
+	price();
 
 	// Pause
 	cin >> hang;
@@ -55,10 +54,10 @@ int dice() {
 	return 0;
 }
 
-int minutes(void) {
+int minutes() {
 	string n1, n2, timestring1, timestring2;
 	int h1, h2, m1, m2;
-	int calltime;
+	int calltime, fullrate, discount;
 
 	// Input
 	cout << "Start of call (format, HH:MM)" << endl;
@@ -76,8 +75,20 @@ int minutes(void) {
 	timestring1.insert(0, n2, 0, 2), timestring2.insert(0, n2, 3, 5);
 	h2 = stoi(timestring1, 0, 10), m2 = stoi(timestring2, 0, 10);
 
+	// Calculate time spent in each rate.
+	if ((h1 == 8 && m1 >= 00) || (h1 > 8) && ((h2 < 23) && m2 < 59)) {
+		fullrate = ((h1 + (h2 - h1) - 18) * 60) + (m2 - 30);
+		discount = ((h2 - h1) * 60 + (m2 - m1) - fullrate);
+	}
+
+	cout << ((h1 + (h2 - h1) - 24) * 60) + (m2 - m1) << endl;
+
+	cout << fullrate << endl;
+	cout << discount << endl;
+
 	// Returning calltime to use it in other function.
 	calltime = (h2 - h1) * 60 + (m2 - m1);
+	cout << calltime << endl;
 	return calltime;
 
 }
