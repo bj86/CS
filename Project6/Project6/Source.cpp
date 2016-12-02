@@ -7,7 +7,7 @@ using namespace std;
 
 string word, crypted;
 int j = 0, k = 0, i = 13, x, controller = 0;
-unsigned char c;
+char c;
 
 	// This function returns the ascii value as integer. If controller is 1 its encrypt, if 2 its decrypt.
 int Sym(int, int, int) {
@@ -32,11 +32,12 @@ int main() {
 		if (j == 5 && i == 7) { i = 13, j = 0; }
 		if (j == 5 && i == 13) { i = 7; j = 0; }
 		x = int(word[k]);
-		unsigned char(c) = Sym(i, x, controller);
-		crypted += unsigned char(c);
+		char(c) = Sym(i, x, controller);
+		crypted += char(c);
 		k++, j++;
 	}
 	cout << crypted << endl;
-
+	HJALTI
+	UWNYaP
 	system("Pause");
 }
