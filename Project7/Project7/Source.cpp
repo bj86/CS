@@ -6,9 +6,6 @@
 
 using namespace std;
 
-// Menu variables
-char hang;
-
 // Function declarations
 void menu();
 void dice();
@@ -20,9 +17,6 @@ void price(int &length, int &r1, int &r2, int &r3);
 int main()
 {	
 	menu();
-
-	// Pause
-	cin >> hang;
 }
 
 void menu() {
@@ -60,13 +54,13 @@ void menu() {
 void dice() {
 	// dice variables
 	int one=0, two=0, three=0, four=0, five=0, six=0;
-	float roll, x;
+	float roll = 0, x = 0, i = 0;
 	cout << "How many times to roll?" << endl;
 	cin >> x;
 
 	cout << "You roll the dice.." << endl;
 	srand(time(0));
-	for (int i = 0; i < x; i++) {
+	for (i, x; i < x; i++) {
 		int roll = (int)(1 + rand() % 6);
 		if (roll == 1) { one++; }
 		if (roll == 2) { two++; }
@@ -184,7 +178,7 @@ void price(int &length, int &r1, int &r2, int &r3) {
 		cout << length << setw(12) << result1;
 	}
 	else {
-		cout << length << setw(12) << result2 << endl;;
+		cout << length << setw(12) << result2 << endl;
 	}
 	//  Try again?
 	cout << endl << endl;
