@@ -80,13 +80,14 @@ void input() {
 		timestring1.insert(0, n2, 0, 2), timestring2.insert(0, n2, 3, 5);
 		h2 = stoi(timestring1, 0, 10), m2 = stoi(timestring2, 0, 10);
 
-		if (h1 > h2) {
+		if (h1 > h2)
+		{
 			cout << "That wont work here, buddy!" << endl;
 			input();
 		}
-		else {
-
-			// This bit handles most of the printing.
+		else 
+		{
+			// This bit does most of the printing.
 			cout << endl;
 			cout << "START" << setw(12) << "STOP" << setw(12) << "LENGTH" << setw(12) << "SEK" << endl;
 			cout << n1 << setw(12) << n2 << setw(12);
