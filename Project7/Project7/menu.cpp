@@ -82,7 +82,8 @@ void dice() {
 	menu();
 }
 
-void ringpling() {
+void ringpling() 
+{
 	string n1, n2, timestring1, timestring2;
 	int h1, h2, m1, m2;
 	cout << fixed;
@@ -166,7 +167,8 @@ void minutes(int &h1, int &h2, int &m1, int &m2)
 	price( length, r1, r2, r3);
 }
 
-void price(int &length, int &r1, int &r2, int &r3) {
+void price(int &length, int &r1, int &r2, int &r3) 
+{
 	double const MOMS = 1.25, RABAT = 0.85, SEK = 4.00, z1 = 0.35, z2 = 1.00;
 	int d;
 
