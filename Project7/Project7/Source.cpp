@@ -10,18 +10,51 @@ using namespace std;
 char hang;
 
 // Function declarations
+void menu();
 void dice();
-void input();
+void ringpling();
 void minutes(int &h1, int &h2, int &m1, int &m2);
 void price(int &length, int &r1, int &r2, int &r3);
 
 
 int main()
 {	
-	input();
+	menu();
 
 	// Pause
 	cin >> hang;
+}
+
+void menu() {
+	int d;
+
+	cout << "Actions: " << endl;
+	cout << "1. DiceSim.exe" << endl;
+	cout << "2. RingPling.exe" << endl;
+	cout << "3. Exit" << endl;
+	cout << endl;
+
+	cout << "Input number to select an action" << endl;
+	cin >> d;
+	cout << endl;
+
+	if (d > 0 && d < 4) {
+
+		if (d == 1) {
+			dice();
+		}
+		else if (d == 2) {
+			ringpling();
+		}
+		else if (d == 3) {
+			exit(0);
+		}
+	}
+	else {
+		cout << "Pick a number between 1 and 3" << endl;
+		menu();
+	}
+
 }
 
 void dice() {
@@ -33,8 +66,7 @@ void dice() {
 
 	cout << "You roll the dice.." << endl;
 	srand(time(0));
-	for (int i = 0; i < x; i++)
-	{
+	for (int i = 0; i < x; i++) {
 		int roll = (int)(1 + rand() % 6);
 		if (roll == 1) { one++; }
 		if (roll == 2) { two++; }
@@ -52,9 +84,11 @@ void dice() {
 	cout << "(4): " << four << setw(3) << float((four / x) * 100) << "%" << setw(6);
 	cout << "(5): " << five << setw(3) << float((five / x) * 100) << "%" << setw(6);
 	cout << "(6): " << six << setw(3) << float((six / x) * 100) << "%" << endl;
+	cout << endl;
+	menu();
 }
 
-void input() {
+void ringpling() {
 	string n1, n2, timestring1, timestring2;
 	int h1, h2, m1, m2;
 	cout << fixed;
@@ -67,8 +101,7 @@ void input() {
 	cin >> n2;
 	cin.get();
 
-	if (n1.length() == 5 && n2.length() == 5)
-	{
+	if (n1.length() == 5 && n2.length() == 5) {
 		// Start of call. Stoi() cuts out numbers and stores as int.
 		timestring1.insert(0, n1, 0, 2), timestring2.insert(0, n1, 3, 5);
 		h1 = stoi(timestring1, 0, 10), m1 = stoi(timestring2, 0, 10);
@@ -80,13 +113,8 @@ void input() {
 		timestring1.insert(0, n2, 0, 2), timestring2.insert(0, n2, 3, 5);
 		h2 = stoi(timestring1, 0, 10), m2 = stoi(timestring2, 0, 10);
 
-		if (h1 > h2)
-		{
-			cout << "That wont work here, buddy!" << endl;
-			input();
-		}
-		else 
-		{
+		if ((h1 < h2) && (m1 <= 59 && m2 <= 59)) {
+
 			// This bit does most of the printing.
 			cout << endl;
 			cout << "START" << setw(12) << "STOP" << setw(12) << "LENGTH" << setw(12) << "SEK" << endl;
@@ -94,13 +122,21 @@ void input() {
 
 			minutes(h1, h2, m1, m2);
 		}
+		else {
+			cout << endl;
+			cout << "!!! ERROR !!!" << endl;
+			cout << "HH (00 - 23), MM (00 - 59)." << endl;
+			cout << "Start has be lower than Stop." << endl;
+			cout << endl;
+			ringpling();
+		}
+	}
 
-	}
-	else 
-	{
+	else {
 		cout << "Please use the correct format! (HH:MM) e.g: 07:45 - 19:02" << endl;
-		input();
+		ringpling();
 	}
+
 
 }
 
@@ -136,22 +172,27 @@ void minutes(int &h1, int &h2, int &m1, int &m2)
 	price( length, r1, r2, r3);
 }
 
-void price(int &length, int &r1, int &r2, int &r3)
-{
+void price(int &length, int &r1, int &r2, int &r3) {
 	double const MOMS = 1.25, RABAT = 0.85, SEK = 4.00, z1 = 0.35, z2 = 1.00;
+	int d;
 
 	// Storing results for better formatting and readability.
 	double result1 = (SEK * r1 * z1 * MOMS * RABAT) + (SEK * r2 * z2 * MOMS * RABAT) + (SEK * r3 * z1 * MOMS * RABAT);
 	double result2 = (SEK * r1 * z1 * MOMS) + (SEK * r2 * z2 * MOMS) + (SEK * r3 * z1 * MOMS);
 
-	if (length > 30)
-	{
+	if (length > 30) {
 		cout << length << setw(12) << result1;
 	}
 	else {
-		cout << length << setw(12) << result2;
+		cout << length << setw(12) << result2 << endl;;
 	}
-	//  Return input() function to try again.
+	//  Try again?
 	cout << endl << endl;
-	input();
+	cout << "Press 1 to try again." << endl;
+	cin >> d;
+	if (d == 1) {
+		ringpling();
+	} else {
+		exit(0);
+	}
 }
