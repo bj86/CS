@@ -136,7 +136,7 @@ void ringpling() {
 
 void minutes(int &h1, int &h2, int &m1, int &m2) 
 {
-	// t1, t2, t3 represent the time limits as constants. When
+	// t1, t2, t3 represent the time limits as constants.
 	int const t1 = 480, t2 = 1110, t3 = 1439;
 	int length, r1 = 0, r2 = 0, r3 = 0;
 	int x, j = 0;
