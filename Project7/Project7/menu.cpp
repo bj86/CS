@@ -28,7 +28,7 @@ void menu() {
 	cout << "3. Exit" << endl;
 	cout << endl;
 
-	cout << "Input number to select an action" << endl;
+	cout << "[Select an action]" << endl;
 	cin >> d;
 	cout << endl;
 
@@ -45,7 +45,7 @@ void menu() {
 		}
 	}
 	else {
-		cout << "Pick a number between 1 and 3" << endl;
+		cout << "[Pick a number between 1 and 3]" << endl;
 		menu();
 	}
 
@@ -114,20 +114,20 @@ void ringpling() {
 			cout << "START" << setw(12) << "STOP" << setw(12) << "LENGTH" << setw(12) << "SEK" << endl;
 			cout << n1 << setw(12) << n2 << setw(12);
 
+			// Parse values by reference.
 			minutes(h1, h2, m1, m2);
 		}
 		else {
 			cout << endl;
-			cout << "!!! ERROR !!!" << endl;
-			cout << "HH (00 - 23), MM (00 - 59)." << endl;
-			cout << "Start has be lower than Stop." << endl;
+			cout << "[HH (00 - 23), MM (00 - 59)]" << endl;
+			cout << "[Start has be lower than Stop]" << endl;
 			cout << endl;
 			ringpling();
 		}
 	}
 
 	else {
-		cout << "Please use the correct format! (HH:MM) e.g: 07:45 - 19:02" << endl;
+		cout << "[Please use the correct format! (HH:MM) e.g: 07:45 - 19:02]" << endl;
 		ringpling();
 	}
 
@@ -136,16 +136,16 @@ void ringpling() {
 
 void minutes(int &h1, int &h2, int &m1, int &m2) 
 {
+	// t1, t2, t3 represent the time limits as constants. When
+	int const t1 = 480, t2 = 1110, t3 = 1439;
 	int length, r1 = 0, r2 = 0, r3 = 0;
-	int x, j = 0, t1, t2, t3;
+	int x, j = 0;
 
-	// Storing length of call to use in other functions.
+	// Storing length as minutes, in a local variable.
 	length = (h2 - h1) * 60 + (m2 - m1);
 
 	// Calculate time spent in each rate. Variable x is the starting point.
-	// t1 = 00:00 to 00:08, t2 = 00:00 18:50, t3 = 00:00 to 23:59.
 	x = (h1 * 60 + m1);
-	t1 = 480, t2 = 1110, t3 = 1439;
 	
 	for (x, j; j < length; x++, j++)
 	{
@@ -162,7 +162,7 @@ void minutes(int &h1, int &h2, int &m1, int &m2)
 			r3++;
 		}
 	}
-
+	// Parse the the values to other function by reference.
 	price( length, r1, r2, r3);
 }
 
@@ -182,7 +182,7 @@ void price(int &length, int &r1, int &r2, int &r3) {
 	}
 	//  Try again?
 	cout << endl << endl;
-	cout << "Press 1 to try again." << endl;
+	cout << "[Press 1 to run it again, any other key to quit]" << endl;
 	cin >> d;
 	if (d == 1) {
 		ringpling();
