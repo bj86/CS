@@ -182,7 +182,7 @@ void price(int &length, int &r1, int &r2, int &r3)
 	else {
 		cout << length << setw(12) << result2 << endl;
 	}
-	//  Try again?
+	// Try again?
 	cout << endl << endl;
 	cout << "[Press 1 to run it again, any other key to quit]" << endl;
 	cin >> d;
