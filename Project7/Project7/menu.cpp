@@ -82,7 +82,8 @@ void dice() {
 	menu();
 }
 
-void ringpling() {
+void ringpling() 
+{
 	string n1, n2, timestring1, timestring2;
 	int h1, h2, m1, m2;
 	cout << fixed;
@@ -136,7 +137,7 @@ void ringpling() {
 
 void minutes(int &h1, int &h2, int &m1, int &m2) 
 {
-	// t1, t2, t3 represent the time limits as constants. When
+	// t1, t2, t3 represent the time limits as constants.
 	int const t1 = 480, t2 = 1110, t3 = 1439;
 	int length, r1 = 0, r2 = 0, r3 = 0;
 	int x, j = 0;
@@ -166,7 +167,8 @@ void minutes(int &h1, int &h2, int &m1, int &m2)
 	price( length, r1, r2, r3);
 }
 
-void price(int &length, int &r1, int &r2, int &r3) {
+void price(int &length, int &r1, int &r2, int &r3) 
+{
 	double const MOMS = 1.25, RABAT = 0.85, SEK = 4.00, z1 = 0.35, z2 = 1.00;
 	int d;
 
@@ -180,7 +182,7 @@ void price(int &length, int &r1, int &r2, int &r3) {
 	else {
 		cout << length << setw(12) << result2 << endl;
 	}
-	//  Try again?
+	// Try again?
 	cout << endl << endl;
 	cout << "[Press 1 to run it again, any other key to quit]" << endl;
 	cin >> d;
