@@ -12,7 +12,6 @@ int main() {
 	int input, counter = 0, sum = 0, result = 0;
 	char hang;
 
-
 	random_device rd;
 	mt19937 mt(rd());
 	uniform_real_distribution<> dis(1, 101);
