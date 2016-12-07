@@ -16,7 +16,7 @@ int main() {
 	mt19937 mt(rd());
 	uniform_real_distribution<> dis(1, 101);
 	cout << "Input a number and the program will find how many times" << endl;
-	cout << "the number is in array(x) with 600 random numbers in range 1 to 100.";
+	cout << "the number is present in array(x) with 600 random numbers in range 1 to 100.";
 	cout << endl << endl;
 	cout << "Number (1 - 100): " << endl;
 	cin >> input;
