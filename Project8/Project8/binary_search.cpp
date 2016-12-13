@@ -1,35 +1,37 @@
 #include <iostream>
-#include <algorithm>
-#include <vector>
+
+// Inspiration and help found here: https://www.youtube.com/watch?v=OAZc1zwjERU
+// Baja1600
 
 using namespace std;
+char hang;
+
+
 
 int main() {
 
-	vector<int> myList{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
-	int x;
-	char hang;
+	int myList[10]{ 11, 13, 15, 18, 21, 29, 43, 69, 88, 100 };
 
-	cout << "Welcome to Binary Search" << endl;
-	cout << "Pick a number between 1 and 16" << endl;
-	cin >> x;
-	cin.get();
-	cout << endl;
+	int start = 0;
+	int end = 10 - 1;
 
-	// Reduce list to half its size. Use i-- or i++ till i == x.
-	for (int i = myList.size() / 2; i >= x || i <= x; ) {
-		if (x < i) {
-			cout << i << endl;
-			i--;
+	// x is the number we are looking for in the array. 
+	int x = 29;
+
+	while (start <= end) {
+		int mid = (start + end) / 2;
+		if (x < myList[mid]) {
+			end = mid - 1;
 		}
-		if (x > i) {
-			cout << i << endl;
-			i++;
-		}
-		if (x == i) {
-			cout << i << endl;
+		else if (x == myList[mid]) {
+			cout << "Number " << x << " found at index " << mid;
 			break;
 		}
+		else {
+			start = mid + 1;
+		}
 	}
+
 	cin >> hang;
 }
+

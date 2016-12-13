@@ -4,6 +4,8 @@
 #include <vector>
 #include <algorithm>
 
+// Baja1600
+
 using namespace std;
 
 vector<int> numbers;
