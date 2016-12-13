@@ -111,6 +111,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="array.cpp" />
+    <ClCompile Include="binary_search.cpp" />
+    <ClCompile Include="vector.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

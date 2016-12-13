@@ -85,6 +85,8 @@ int main() {
 
 	// Bubble-sort. I had done my own sort and print when I noticed the specification.
 	// Using a smaller array because my PC kept crashing when I made critical errors. :]
+
+	// Adding 10 random numbers to test-array.
 	cout << "Bubble Sort" << endl;
 	for (int i = 0; i < 11; i++) {
 		test[i] = int(dis(mt));
