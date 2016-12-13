@@ -6,8 +6,6 @@
 using namespace std;
 char hang;
 
-
-
 int main() {
 
 	int myList[10]{ 11, 13, 15, 18, 21, 29, 43, 69, 88, 100 };
