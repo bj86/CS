@@ -12,32 +12,38 @@ string lastname1, lastname2, lastname3;
 
 string name1, name2, name3;
 string fname1, fname2, fname3;
+int space;
+char hang;
 
 
 int main() {
 
+
 	// Input
-	cout << "Firstname (1): ";
-	cin >> firstname1;
-	cout << "Lastname (1): ";
-	cin >> lastname1;
-	name1 = lastname1 + " " + firstname1;
-	fname1 = lastname1 + " " + firstname1;
+	cout << "Name (1): ";
+	getline(cin, name1);
+	space = name1.find(" ", 0);
+	firstname1 = name1.substr(0, space);
+	lastname1 = name1.substr(space + 1);
 
-	cout << "Firstname (2): ";
-	cin >> firstname2;
-	cout << "Lastname (2): ";
-	cin >> lastname2;
-	name2 = lastname2 + " " + firstname2;
-	fname2 = lastname2 + " " + firstname2;
+	fname1 = firstname1 + " " + lastname1;
 
-	cout << "Firstname (3): ";
-	cin >> firstname3;
-	cout << "Lastname (3): ";
-	cin >> lastname3;
-	name3 = lastname3 + " " + firstname3;
-	fname3 = lastname3 + " " + firstname3;
-	cout << endl;
+	cout << "Name (2): ";
+	getline(cin, name2);
+	space = name2.find(" ", 0);
+	firstname2 = name2.substr(0, space);
+	lastname2 = name2.substr(space + 1);
+
+	fname2 = firstname2 + " " + lastname2;
+
+	cout << "Name (3): ";
+	getline(cin, name3);
+	space = name3.find(" ", 0);
+	firstname3 = name3.substr(0, space);
+	lastname3 = name3.substr(space + 1);
+
+	fname3 = firstname3 + " " + lastname3;
+
 
 	// Checking if any last names are equal. 
 	if ((lastname1 != lastname2) && (lastname1 != lastname3) && (lastname2 != lastname3)) {
@@ -106,5 +112,5 @@ int main() {
 	}
 
 
-	system("Pause");
+	cin >> hang;
 }

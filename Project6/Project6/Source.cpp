@@ -28,6 +28,7 @@ int main() {
 
 	// I kept missing the first character, but when I added + 1 to the while loop, it kind of fixed it. FIXED!
 	// For some reason I keep getting weird symbol in the front of every encryption/decryption. FIXED!
+	// - It is not possible to input a text that contains spaces. Fix!
 	while (k < (word.length())) {
 		if (j == 5 && i == 7) { i = 13, j = 0; }
 		if (j == 5 && i == 13) { i = 7; j = 0; }
@@ -37,7 +38,5 @@ int main() {
 		k++, j++;
 	}
 	cout << crypted << endl;
-	HJALTI
-	UWNYaP
 	system("Pause");
 }
