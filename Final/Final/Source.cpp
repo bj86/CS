@@ -1,31 +1,101 @@
-#include <iostream>
-#include <iomanip>
-#include <vector>
-#include <string>
-#include <fstream>
-#include <algorithm>
+#include <iostream> // input output stream
+#include <iomanip> // console formatting
+#include <vector> // vectors for holding structs.
+#include <string> // strings, substr and such.
+#include <fstream> // file management
+#include <algorithm> // sort()
 
 using namespace std;
+#include "constants.h"
 
-#include "Header.h"
-
+// final project by Baja1600.
 
 int main() {
 	cout << setprecision(2);
 	cout << fixed;
 
 	vector<People> data;
-	openFile(data);
-	//sortData(data, byName);
-	addPerson(data);
-	saveFile(data);
-	printAll(data);
-	//search(data);
-	//deletePerson(data);
-	//cout << size(data) << endl;
-	system("pause");
+
+	menu(data);
 }
 
+void menu(vector<People> &data) {
+	int selection = 0;
+	cout << "......................................................." << endl;
+	cout << "People in vector: " << size(data) << endl;
+	cout << "......................................................." << endl;
+	cout << setw(10) << "Menu" << endl;
+	cout << "1. Add a person\n2. Print data\n3. Search\n4. Delete a person\n";
+	cout << "5. Sort by name\n6. Sort by signature\n7. Sort by height\n8. Sort randomly \n";
+	cout << "9. Save data \n10. Load data\n11. Quit \n";
+	cout << "......................................................." << endl;
+	cout << "Select an option [1 - 11] and press enter. ";
+	cin >> selection, cin.get();
+
+	// menu conditions
+	if (selection > 0 && selection < 12) {
+		switch (selection) {
+		case(1):
+			addPerson(data);
+			menu(data);
+		case(2):
+			printAll(data);
+			menu(data);
+		case(3):
+			search(data);
+			menu(data);
+		case(4):
+			deletePerson(data);
+			menu(data);
+		case(5):
+			sortData(data, byName);
+			menu(data);
+		case(6):
+			sortData(data, bySig);
+			menu(data);
+		case(7):
+			sortData(data, byHeight);
+			menu(data);
+		case(8):
+			sortData(data, byRandom);
+			menu(data);
+		case(9):
+			saveFile(data);
+			menu(data);
+		case(10):
+			openFile(data);
+			menu(data);
+		case(11):
+			exit(0);
+		}
+	} else {
+		cout << "DEBUG: Invalid option. Please choose a number between 1 and 11." << endl;
+		menu(data);
+	}
+}
+
+	// for sorting by lastname, lastname if first names are equal.
+const bool nameAsc(const People &x, const People &y)
+{
+	if (x.lastName == y.lastName) {
+		return x.firstName < x.firstName;
+	}
+	else {
+		return x.lastName > y.lastName;
+	}
+}
+
+	// for sorting by signature.
+const bool sigAsc(const People &x, const People &y) {
+	return x.sig > y.sig;
+}
+
+	// for sorting by height.
+const bool heightDesc(const People &x, const People &y) {
+	return x.height < y.height;
+}
+
+	// Takes input from keyboard, saves to Struct and pushes to vector.
 vector<People> addPerson(vector<People> &data) {
 	float tmpHeight;
 	int x = 0, i = 0;
@@ -46,6 +116,7 @@ vector<People> addPerson(vector<People> &data) {
 	return data;
 }
 
+	// Searches person by signature, erases from vector<Struct> where equal.
 vector<People> deletePerson(vector<People> &data) {
 	string input;
 	bool found = false;
@@ -64,12 +135,13 @@ vector<People> deletePerson(vector<People> &data) {
 		cout << "Person deleted from vector." << endl;
 	}
 	else if (found == false) {
-		cout << "Unused or invalid signature." << endl;
+		cout << "DEBUG: Unused or invalid signature." << endl;
 	}
 	return data;
 
 }
 
+	// Opens file, removes any linebreak and arranges data in vector<Struct>
 vector<People> openFile(vector<People> &data) {
 	// For holding local strings while processing.
 	vector<string> tmpVec1;
@@ -80,14 +152,15 @@ vector<People> openFile(vector<People> &data) {
 	getline(cin, fileName);
 	ifstream myFile(fileName);
 	string tmpStr;
-	// Storing our data in a vector.
+	// Storing our data in a temporary vector.
 	while (getline(myFile, tmpStr, '|')) {
 		tmpStr.erase(remove(tmpStr.begin(), tmpStr.end(), '\n'), tmpStr.end());
 		tmpVec1.push_back(tmpStr);
 	}
 	myFile.close();
 	int j = 0, k = 1, h = 2, g = 3;
-	// Appending our vector to a vector<struct>
+	// Appending our vector to a vector<struct>, 4 at a time.
+	// If you need to add another column of data, increase j, k, h, g to 5.
 	for (int i = 0; i < size(tmpVec1) / 4; i++) {
 		temp2.firstName = tmpVec1[j], temp2.lastName = tmpVec1[k];
 		temp2.sig = tmpVec1[h], temp2.height = stof(tmpVec1[g]);
@@ -109,6 +182,7 @@ vector<People> sortData(vector<People> &data, method e) {
 	return data;
 }
 
+	// Saves file to disk. One person per line.
 void saveFile(vector<People> data) {
 	string fileName;
 	cout << "Saving file [*.txt]" << endl;
@@ -124,6 +198,7 @@ void saveFile(vector<People> data) {
 	myFile.close();
 }
 
+	// Generates an unique signature, checks if already exists.
 string genSig(string x, string y, vector<People> &data) {
 	string signature;
 	int inc = 10;
@@ -142,6 +217,7 @@ string genSig(string x, string y, vector<People> &data) {
 	return signature;
 }
 
+	// searches the vector a signature equal to input.
 void search(vector<People> data) {
 	string input;
 	bool found = false;
@@ -172,13 +248,12 @@ void search(vector<People> data) {
 		cout << setw(15) << data[pos].height << endl << setw(10);
 		cout << "......................................................." << endl;
 	} else {
-		cout << "Unused or invalid signature." << endl;
+		cout << "DEBUG: Unused or invalid signature." << endl;
 	}
 }
 
+	// prints all data from vector<Struct>
 void printAll(vector<People> data) {
-	cout << "......................................................." << endl;
-	cout << "Elements in vector: " << size(data) << endl;
 	cout << "......................................................." << endl;
 	cout << setw(10) << "First name";
 	cout << setw(15) << "Last name";

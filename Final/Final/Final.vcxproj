@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header.h" />
+    <ClInclude Include="constants.h" />
     <ClInclude Include="backup.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
