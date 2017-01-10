@@ -7,6 +7,7 @@ const struct People {
 	string sig;
 	float height;
 };
+
 // enum for sorting function
 const enum method { byName = 1, bySig = 2, byHeight = 3, byRandom = 4 };
 
