@@ -4,6 +4,7 @@
 #include <string> // strings, substr and such.
 #include <fstream> // file management
 #include <algorithm> // sort()
+#include <random> // c++ 11 random
 
 using namespace std;
 #include "constants.h"
@@ -100,19 +101,15 @@ vector<People> addPerson(vector<People> &data) {
 	float tmpHeight;
 	int x = 0, i = 0;
 	People temp;
-	cout << "Amount of people to store? ";
-	cin >> x, cin.get();
-	for (x, i; i < x; i++) {
-		cout << "First name: ";
-		getline(cin, temp.firstName);
-		cout << "Last name: ";
-		getline(cin, temp.lastName);
-		temp.sig = genSig(temp.firstName, temp.lastName, data);
-		cout << "Your height: ";
-		cin >> tmpHeight, cin.get();
-		temp.height = tmpHeight;
-		data.push_back(temp);
-	}
+	cout << "First name: ";
+	getline(cin, temp.firstName);
+	cout << "Last name: ";
+	getline(cin, temp.lastName);
+	temp.sig = genSig(temp.firstName, temp.lastName, data);
+	cout << "Your height: ";
+	cin >> tmpHeight, cin.get();
+	temp.height = tmpHeight;
+	data.push_back(temp);
 	return data;
 }
 
@@ -169,7 +166,7 @@ vector<People> openFile(vector<People> &data) {
 	}
 	return data;
 }
-
+	// sorting vector, takes enum as parameter.
 vector<People> sortData(vector<People> &data, method e) {
 	switch (e) {
 	case(byName):
@@ -178,6 +175,9 @@ vector<People> sortData(vector<People> &data, method e) {
 		sort(data.begin(), data.end(), sigAsc);
 	case(byHeight):
 		sort(data.begin(), data.end(), heightDesc);
+	case(byRandom):
+		auto random = default_random_engine();
+		shuffle(data.begin(), data.end(), random);
 	}
 	return data;
 }
@@ -254,7 +254,6 @@ void search(vector<People> data) {
 
 	// prints all data from vector<Struct>
 void printAll(vector<People> data) {
-	cout << "......................................................." << endl;
 	cout << setw(10) << "First name";
 	cout << setw(15) << "Last name";
 	cout << setw(15) << "Signature";
@@ -266,5 +265,4 @@ void printAll(vector<People> data) {
 		cout << setw(15) << right << data[i].sig << setw(10);
 		cout << setw(15) << right << data[i].height << setw(10) << endl;
 	}
-	cout << "......................................................." << endl;
 }
