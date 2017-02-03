@@ -5,40 +5,44 @@ using namespace std;
 	// Very hard assignment, but fun to do! :)
 	// By Baja1600
 
-int j = 0, k = 0, i = 13, x, controller = 0;;
-int Sym(int, int, int);
-
 int main() {
 
 	char c, hang;
-	string word, crypted;
-
-
+	string word, encrypted, decrypted;
 	cout << "Input string" << endl;
 	getline(cin, word);
-	cout << endl;
-	cout << "Encrypt(1) or Decrypt(2) ?" << endl;
-	cin >> int(controller);
+	encrypted = word;
 
-	// - It is not possible to input a text that contains spaces. Fix!
-	while (k < (word.length())) {
-		if (j == 5 && i == 7) { i = 13, j = 0; }
-		if (j == 5 && i == 13) { i = 7; j = 0; }
-		x = int(word[k]);
-		char(c) = Sym(i, x, controller);
-		crypted += char(c);
-		k++, j++;
+	// For every 5 letters, the program changes between rot7 and rot13
+	size_t i = 0;
+	while ( i != encrypted.length()) {
+		for (int j = 0; j != 5 && i != encrypted.length(); j++) {
+			encrypted[i] += 13;
+			i++;
+		}
+		for (int j = 0; j != 5 && i != encrypted.length(); j++) {
+			encrypted[i] += 7;
+			i++;
+		}
 	}
-	cout << crypted << endl;
+	i = 0;
+	cout << "Encrypted word: "<< encrypted << endl;
+
+	// Now all we have to do is reverse the process to get the Decrypted word.
+	i = 0;
+
+	while (i != encrypted.length()) {
+		for (int j = 0; j != 5 && i != encrypted.length(); j++) {
+			encrypted[i] -= 13;
+			i++;
+		}
+		for (int j = 0; j != 5 && i != encrypted.length(); j++) {
+			encrypted[i] -= 7;
+			i++;
+		}
+	}
+
+	cout << "Decrypted word: " << encrypted << endl;
+
 	cin >> hang;
-}
-
-	// This function returns the ascii value as integer. If controller is 1 its encrypt, if 2 its decrypt.
-int Sym(int, int, int) {
-	if (controller == 1) {
-		return x + i;
-	}
-	else if (controller == 2) {
-		return x - i;
-	}
 }

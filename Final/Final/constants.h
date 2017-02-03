@@ -18,7 +18,6 @@ vector<People> openFile(vector<People> &data);
 vector<People> sortData(vector<People> &data, method);
 string genSig(string, string, vector<People> &data);
 void menu(vector<People> &data);
-void clearScreen();
 void search(vector<People>);
 void printAll(vector<People>);
 void saveFile(vector<People>);

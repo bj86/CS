@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstdlib>
-#include <ctime>
+#include <random>
 #include <string>
 #include <iomanip>
 
@@ -55,13 +55,16 @@ void dice() {
 	// dice variables
 	int one=0, two=0, three=0, four=0, five=0, six=0;
 	float roll = 0, x = 0, i = 0;
+	default_random_engine rd;
+	cout << fixed << setprecision(2);
+
 	cout << "How many times to roll?" << endl;
 	cin >> x;
 
 	cout << "You roll the dice.." << endl;
-	srand(time(0));
 	for (i, x; i < x; i++) {
-		int roll = (int)(1 + rand() % 6);
+		uniform_int_distribution<int> e(1, 6);
+		int roll = e(rd);
 		if (roll == 1) { one++; }
 		if (roll == 2) { two++; }
 		if (roll == 3) { three++; }
@@ -70,45 +73,62 @@ void dice() {
 		if (roll == 6) { six++; }
 		cout << roll << setw(2);
 	}
+
 	cout << endl;
 	cout << "Count & Relative frequency" << endl;
-	cout << "(1): " << one << setw(3) << float((one / x) * 100) << "%" << setw(6);
-	cout << "(2): " << two << setw(3) << float((two / x) * 100) << "%" << setw(6);
-	cout << "(3): " << three << setw(3) << float((three / x) * 100) << "%" << endl;
-	cout << "(4): " << four << setw(3) << float((four / x) * 100) << "%" << setw(6);
-	cout << "(5): " << five << setw(3) << float((five / x) * 100) << "%" << setw(6);
-	cout << "(6): " << six << setw(3) << float((six / x) * 100) << "%" << endl;
+	cout << "(1): " << one << setw(10) << float((one / x) * 100) << "%" << setw(10);
+	cout << "(2): " << two << setw(10) << float((two / x) * 100) << "%" << setw(10);
+	cout << "(3): " << three << setw(10) << float((three / x) * 100) << "%" << endl;
+	cout << "(4): " << four << setw(10) << float((four / x) * 100) << "%" << setw(10);
+	cout << "(5): " << five << setw(10) << float((five / x) * 100) << "%" << setw(10);
+	cout << "(6): " << six << setw(10) << float((six / x) * 100) << "%" << endl;
 	cout << endl;
 	menu();
 }
 
-void ringpling() 
+void ringpling()
 {
 	string n1, n2, timestring1, timestring2;
 	int h1, h2, m1, m2;
+	size_t pos1;
 	cout << fixed;
 	cout << setprecision(2);
 
 	// Input times
-	cout << "Start (HH:MM) ";
+	cout << "Start (HH:MM or H:MM) ";
 	cin >> n1;
-	cout << "Stop (HH:MM) ";
+	cout << "Stop (HH:MM or H:MM) ";
 	cin >> n2;
 	cin.get();
 
+	// HH:MM format
 	if (n1.length() == 5 && n2.length() == 5) {
+		pos1 = 1;
+	}
+
+	// H:MM format
+	if (n1.length() == 4 && n2.length() == 4) {
+		pos1 = 0;
+	}
+	else if (n1.length() < 4 || n2.length() < 4) {
+		cout << "Bad format. Please try again." << endl;
+		ringpling();
+	}
+
+	if (n1.length() != 0 && n2.length() != 0) {
+
 		// Start of call. Stoi() cuts out numbers and stores as int.
-		timestring1.insert(0, n1, 0, 2), timestring2.insert(0, n1, 3, 5);
+		timestring1.insert(0, n1, 0, pos1 + 2), timestring2.insert(0, n1, pos1 + 3, pos1 + 5);
 		h1 = stoi(timestring1, 0, 10), m1 = stoi(timestring2, 0, 10);
 
 		// Clearing temporary strings for next input.
 		timestring1 = "", timestring2 = "";
 
 		// End of call. Same as above.
-		timestring1.insert(0, n2, 0, 2), timestring2.insert(0, n2, 3, 5);
+		timestring1.insert(0, n2, 0, pos1 + 2), timestring2.insert(0, n2, pos1 + 3, pos1 + 5);
 		h2 = stoi(timestring1, 0, 10), m2 = stoi(timestring2, 0, 10);
 
-		if ((h1 < h2) && (m1 <= 59 && m2 <= 59)) {
+		if ((h1 <= h2) && (m1 < 59) && (m2 <= 59)) {
 
 			// This bit does most of the printing.
 			cout << endl;
@@ -126,14 +146,12 @@ void ringpling()
 			ringpling();
 		}
 	}
-
 	else {
-		cout << "[Please use the correct format! (HH:MM) e.g: 07:45 - 19:02]" << endl;
+		cout << "Please input start/stop. HH:MM or H:MM" << endl;
 		ringpling();
 	}
-
-
 }
+
 
 void minutes(int &h1, int &h2, int &m1, int &m2) 
 {

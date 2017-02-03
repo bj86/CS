@@ -28,13 +28,29 @@ int main() {
 
 	fname1 = firstname1 + " " + lastname1;
 
+	for (int i = 0; i < firstname1.length(); i++) {
+		firstname1[i] = tolower(firstname1[i]);
+		for (int j = 0; j < lastname1.length(); j++) {
+			lastname1[j] = tolower(lastname1[j]);
+		}
+	}
+
 	cout << "Name (2): ";
 	getline(cin, name2);
 	space = name2.find(" ", 0);
 	firstname2 = name2.substr(0, space);
 	lastname2 = name2.substr(space + 1);
 
+	// copy of original name, for printing.
 	fname2 = firstname2 + " " + lastname2;
+
+	// making everything lowercase.
+	for (int i = 0; i < firstname2.length(); i++) {
+		firstname2[i] = tolower(firstname2[i]);
+		for (int j = 0; j < lastname2.length(); j++) {
+			lastname2[j] = tolower(lastname2[j]);
+		}
+	}
 
 	cout << "Name (3): ";
 	getline(cin, name3);
@@ -44,72 +60,136 @@ int main() {
 
 	fname3 = firstname3 + " " + lastname3;
 
-
-	// Checking if any last names are equal. 
-	if ((lastname1 != lastname2) && (lastname1 != lastname3) && (lastname2 != lastname3)) {
-		if ((lastname1 < lastname2) && (lastname1 < lastname3) && (lastname2 < lastname3)) {
-			cout << name1 << endl;
-			cout << name2 << endl;
-			cout << name3 << endl;
-		}
-		else if ((lastname1 < lastname2) && (lastname1 < lastname3) && (lastname2 < lastname3)) {
-			cout << name1 << endl;
-			cout << name3 << endl;
-			cout << name2 << endl;
-		}
-		else if ((lastname2 < lastname1) && (lastname2 < lastname3) && (lastname1 < lastname2)) {
-			cout << name2 << endl;
-			cout << name1 << endl;
-			cout << name3 << endl;
-		}
-		else if ((lastname2 < lastname1) && (lastname2 < lastname3) && (lastname3 < lastname1)) {
-			cout << name2 << endl;
-			cout << name3 << endl;
-			cout << name1 << endl;
-		}
-		else if ((lastname3 < lastname1) && (lastname3 < lastname2) && (lastname2 < lastname1)) {
-			cout << name3 << endl;
-			cout << name2 << endl;
-			cout << name1 << endl;
-		}
-		else if ((lastname3 < lastname1) && (lastname3 < lastname2) && (lastname1 < lastname2)) {
-			cout << name3 << endl;
-			cout << name1 << endl;
-			cout << name2 << endl;
-			}
-	// If equal found, switch to sorting by first name. 
-	} else {
-		if ((firstname1 < firstname2) && (firstname1 < firstname3) && (firstname2 < firstname3)) {
-			cout << fname1 << endl;
-			cout << fname2 << endl;
-			cout << fname3 << endl;
-		}
-		else if ((firstname1 < firstname2) && (firstname1 < firstname3) && (firstname2 < firstname3)) {
-			cout << fname1 << endl;
-			cout << fname3 << endl;
-			cout << fname2 << endl;
-		}
-		else if ((firstname2 < firstname1) && (firstname2 < firstname3) && (firstname1 < firstname2)) {
-			cout << fname2 << endl;
-			cout << fname1 << endl;
-			cout << fname3 << endl;
-		}
-		else if ((firstname2 < firstname1) && (firstname2 < firstname3) && (firstname3 < firstname1)) {
-			cout << fname2 << endl;
-			cout << fname3 << endl;
-			cout << fname1 << endl;
-		}
-		else if ((firstname3 < firstname1) && (firstname3 < firstname2) && (firstname2 < firstname1)) {
-			cout << fname3 << endl;
-			cout << fname2 << endl;
-			cout << fname1 << endl;
-		}
-		else if ((firstname3 < firstname1) && (firstname3 < firstname2) && (firstname1 < firstname2)) {
-			cout << fname3 << endl;
-			cout << fname1 << endl;
-			cout << fname2 << endl;
+	for (int i = 0; i < firstname3.length(); i++) {
+		firstname3[i] = tolower(firstname3[i]);
+		for (int j = 0; j < lastname3.length(); j++) {
+			lastname3[j] = tolower(lastname3[j]);
 		}
 	}
+
+
+	// if lastnames are equal.
+	if (lastname1 == lastname2 || lastname1 == lastname3 || lastname2 == lastname3) {
+		cout << "Found duplicate last names" << endl;
+		if (firstname1 < firstname2 && firstname1 < firstname3 && firstname2 < firstname3) {
+			cout << 1 << endl;
+			cout << fname1 << endl;
+			cout << fname2 << endl;
+			cout << fname3 << endl;
+		}
+		if (firstname1 < firstname2 && firstname1 < firstname3 && firstname3 < firstname2) {
+			cout << 2 << endl;
+			cout << fname1 << endl;
+			cout << fname3 << endl;
+			cout << fname2 << endl;
+		}
+		if (firstname2 < firstname1 && firstname2 < firstname3 && firstname1 < firstname3) {
+			cout << 3 << endl;
+			cout << fname2 << endl;
+			cout << fname1 << endl;
+			cout << fname3 << endl;
+		}
+		if (firstname2 < firstname1 && firstname2 < firstname3 && firstname3 < firstname1) {
+			cout << 4 << endl;
+			cout << fname2 << endl;
+			cout << fname3 << endl;
+			cout << fname1 << endl;
+		}
+		if (firstname3 < firstname1 && firstname3 < firstname2 && firstname1 < firstname2) {
+			cout << 5 << endl;
+			cout << fname3 << endl;
+			cout << fname1 << endl;
+			cout << fname2 << endl;
+		}
+		if (firstname3 < firstname1 && firstname3 < firstname2 && firstname2 < firstname1) {
+			cout << 6 << endl;
+			cout << fname3 << endl;
+			cout << fname2 << endl;
+			cout << fname1 << endl;
+		}
+	} 
+	// If firstnames are equal.
+	else if (firstname1 == firstname2 || firstname1 == firstname3 || firstname2 == firstname3) {
+		cout << "Found duplicate first names " << endl;
+		if (lastname1 < lastname2 && lastname1 < lastname3 && lastname2 < lastname3) {
+			cout << 7 << endl;
+			cout << fname1 << endl;
+			cout << fname2 << endl;
+			cout << fname3 << endl;
+		}
+		if (lastname1 < lastname2 && lastname1 < lastname3 && lastname3 < lastname2) {
+			cout << 8 << endl;
+			cout << fname1 << endl;
+			cout << fname3 << endl;
+			cout << fname2 << endl;
+		}
+		if (lastname2 < lastname1 && lastname2 < lastname3 && lastname1 < lastname3) {
+			cout << 9 << endl;
+			cout << fname2 << endl;
+			cout << fname1 << endl;
+			cout << fname3 << endl;
+		}
+		if (lastname2 < lastname1 && lastname2 < lastname3 && lastname3 < lastname1) {
+			cout << 10 << endl;
+			cout << fname2 << endl;
+			cout << fname3 << endl;
+			cout << fname1 << endl;
+		}
+		if (lastname3 < lastname1 && lastname3 < lastname2 && lastname1 < lastname2) {
+			cout << 11 << endl;
+			cout << fname3 << endl;
+			cout << fname1 << endl;
+			cout << fname2 << endl;
+		}
+		if (lastname3 < lastname1 && lastname3 < lastname2 && lastname2 < lastname1) {
+			cout << 12 << endl;
+			cout << fname3 << endl;
+			cout << fname2 << endl;
+			cout << fname1 << endl;
+		}
+	}
+	// else, just sort by lastname.
+	else {
+		cout << "Sorting by lastname" << endl;
+		if (lastname1 < lastname2 && lastname1 < lastname3 && lastname2 < lastname3) {
+			cout << 13 << endl;
+			cout << fname1 << endl;
+			cout << fname2 << endl;
+			cout << fname3 << endl;
+		}
+		if (lastname1 < lastname2 && lastname1 < lastname3 && lastname3 < lastname2) {
+			cout << 14 << endl;
+			cout << fname1 << endl;
+			cout << fname3 << endl;
+			cout << fname2 << endl;
+		}
+		if (lastname2 < lastname1 && lastname2 < lastname3 && lastname1 < lastname3) {
+			cout << 15 << endl;
+			cout << fname2 << endl;
+			cout << fname1 << endl;
+			cout << fname3 << endl;
+		}
+		if (lastname2 < lastname1 && lastname2 < lastname3 && lastname3 < lastname1) {
+			cout << 16 << endl;
+			cout << fname2 << endl;
+			cout << fname1 << endl;
+			cout << fname3 << endl;
+		}
+		if (lastname3 < lastname1 && lastname3 < lastname2 && lastname1 < lastname3) {
+			cout << 17 << endl;
+			cout << fname3 << endl;
+			cout << fname1 << endl;
+			cout << fname2 << endl;
+		}
+		if (lastname3 < lastname1 && lastname3 < lastname2 && lastname2 < lastname1) {
+			cout << 18 << endl;
+			cout << fname3 << endl;
+			cout << fname2 << endl;
+			cout << fname1 << endl;
+		}
+	}
+	// if firstnames are equal.
+	// else sort by lastname.
 
 
 	cin >> hang;

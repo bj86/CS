@@ -21,13 +21,14 @@ int main() {
 }
 
 void menu(vector<People> &data) {
+	//clearScr();
 	int selection = 0;
 	cout << "................................................................." << endl;
 	cout << "People in vector: " << size(data) << endl;
 	cout << "................................................................." << endl;
-	cout << setw(10) << "Menu" << endl;
+	cout << setw(20) << "Menu" << endl;
 	cout << "1. Add a person\n2. Print data\n3. Search\n4. Delete a person\n";
-	cout << "5. Sort by name\n6. Sort by signature\n7. Sort by height\n8. Sort randomly \n";
+	cout << "5. Sort by name\n6. Sort by signature\n7. Sort by height\n8. Sort randomly\n";
 	cout << "9. Save data \n10. Load data\n11. Quit \n";
 	cout << "................................................................." << endl;
 	cout << "Select an option [1 - 11] and press enter. ";
@@ -78,7 +79,12 @@ void menu(vector<People> &data) {
 	// for sorting by lastname, lastname if first names are equal.
 const bool nameAsc(const People &x, const People &y)
 {
-	return x.lastName < y.lastName;
+	if (x.lastName == y.lastName) {
+		return x.firstName < y.firstName;
+	}
+	else {
+		return x.lastName < y.lastName;
+	}
 }
 
 	// for sorting by signature.
@@ -95,6 +101,7 @@ const bool heightDesc(const People &x, const People &y)
 
 	// Takes input from keyboard, saves to Struct and pushes to vector.
 vector<People> addPerson(vector<People> &data) {
+	cout << "Add person to vector. [first name, last name, height]" << endl;
 	float tmpHeight;
 	int x = 0, i = 0;
 	People temp;
@@ -212,7 +219,7 @@ void saveFile(vector<People> data) {
 	// Generates an unique signature, checks if already exists.
 	// Transforms to lower case.
 string genSig(string x, string y, vector<People> &data) {
-	string signature;
+	string signature, tempsig;
 	int inc = 10;
 	while (x.length() < 3) {
 		x += "x";
@@ -220,13 +227,13 @@ string genSig(string x, string y, vector<People> &data) {
 	while (y.length() < 3) {
 		y += "x";
 	}
+	tempsig = ;
 	for (int i = 0; i < size(data); i++) {
-		if (data[i].sig == (x.substr(0, 3) + y.substr(0, 3) + to_string(inc))) {
+		if (data[i].sig == x.substr(0, 3) + y.substr(0, 3) + to_string(inc)) {
 			inc++;
 		}
 	}
 	signature = x.substr(0, 3) + y.substr(0, 3) + to_string(inc);
-	transform(signature.begin(), signature.end(), signature.begin(), tolower);
 	return signature;
 }
 
@@ -265,20 +272,32 @@ void search(vector<People> data) {
 	}
 }
 
-	// Prints all data from vector<Struct>
+// Prints all data from vector<Struct>, 20 at the time.
 void printAll(vector<People> data) {
 	cout << endl;
 	cout << setw(5) << "#";
-	cout << setw(15) << "Signature";
-	cout << setw(15) << "First name";
-	cout << setw(15) << "Last name";
-	cout << setw(15) << "Height" << endl;
+	cout << setw(20) << "Signature";
+	cout << setw(20) << "First name";
+	cout << setw(20) << "Last name";
+	cout << setw(20) << "Height" << endl;
 	cout << endl;
-	for (int i = 0; i < size(data); i++) {
-		cout << setw(5) << right << i;
-		cout << setw(15) << right << data[i].sig << setw(10);
-		cout << setw(15) << right << data[i].firstName;
-		cout << setw(15) << right << data[i].lastName << setw(10);
-		cout << setw(15) << right << data[i].height << setw(10) << endl;
+
+	int i = 0;
+	for (int j = 0; j < 20 && i != size(data); j++) {
+		cout << setw(5) << right << i + 1;
+		cout << setw(20) << right << data[i].sig << setw(10);
+		cout << setw(20) << right << data[i].firstName;
+		cout << setw(20) << right << data[i].lastName << setw(10);
+		cout << setw(20) << right << data[i].height << setw(10) << endl;
+		i++;
+		if (j == 19 && i != size(data)) {
+			string getmore = "";
+			cout << "................................................................." << endl;
+			cout << "Want to print more? (Y/N)" << endl;
+			cout << "................................................................." << endl;
+			getline(cin, getmore);
+			if (getmore == "Y" || getmore == "y")
+				j = 0;
+		}
 	}
 }
